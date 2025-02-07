@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NASA Picture of the Day</title>
     <style>
-        h1 , footer {
-            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        h1, footer {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
         h1 {
             font-size: medium;
@@ -19,21 +19,29 @@
 <body>
     <main>
         <h1>Today's Astronomy Picture of the day is:</h1>
-    <!--
         <div id="apod-container">
             <h2 id="apod-title"></h2>
             <img id="nasaimg" alt="NASA Astronomy Picture of The Day">
             <p id="apod-date"></p>
-            <p id="apod-explaination"></p>
+            <p id="apod-explanation"></p>
         </div>
-    -->
 
-        <script> // NASA script goes here. Needs API key to function, but services is currently iffy as of writing this code.
-            constplaceholder
-            constplaceholder
+        <script>
+            const apiKey = 'G8FakaKY32hGw7ITIJch8hz1DvGull7cQlzOxbgf';
+            const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('apod-title').textContent = data.title;
+                    document.getElementById('nasaimg').src = data.url;
+                    document.getElementById('apod-date').textContent = data.date;
+                    document.getElementById('apod-explanation').textContent = data.explanation;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         </script>
-        
     </main>
-    <footer>It is a beautiful image.</footer>
 </body>
 </html>
